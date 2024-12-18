@@ -172,10 +172,10 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ```
 
-### Key Points:
-- **Setup Instructions**: It includes all the necessary steps for setting up the project, installing dependencies, running migrations, and starting the development server.
-- **API Documentation**: Each API endpoint is documented with the URL, method, request body, and response.
-- **Task Breakdown**: A summary of each task is provided for clarity.
+Key Points:
+- Setup Instructions: It includes all the necessary steps for setting up the project, installing dependencies, running migrations, and starting the development server.
+- API Documentation: Each API endpoint is documented with the URL, method, request body, and response.
+- Task Breakdown: A summary of each task is provided for clarity.
 
 ### Next Steps:
 1. Replace the placeholder GitHub URL in the **Clone the repository** section.
