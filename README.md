@@ -166,9 +166,6 @@ The `/balance/` endpoint allows users to check their current token balance by se
 - **Insufficient tokens**: If a user tries to send a message without enough tokens, they will receive an error response.
 - **Database issues**: Make sure you've run the migrations using `python manage.py migrate`.
 
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ```
 
