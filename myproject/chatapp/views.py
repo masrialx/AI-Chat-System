@@ -3,22 +3,22 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from .models import User
 from .serializers import UserSerializer
+from .models import User, Chat
+from .serializers import ChatSerializer
+from django.utils import timezone
+from .serializers import LoginSerializer
+import random
+import string
 
 class UserRegistrationView(APIView):
     def post(self, request):
         serializer = UserSerializer(data=request.data)
         if serializer.is_valid():
-            # Save the user and return success
             serializer.save()
             return Response({"message": "User registered successfully."}, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-from rest_framework import status
-from rest_framework.response import Response
-from rest_framework.views import APIView
-from .serializers import LoginSerializer
-import random
-import string
+
 
 class UserLoginView(APIView):
     def post(self, request):
@@ -29,3 +29,28 @@ class UserLoginView(APIView):
             token = ''.join(random.choices(string.ascii_letters + string.digits, k=20))
             return Response({"token": token}, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class ChatView(APIView):
+    def post(self, request):
+        token = request.headers.get('Authorization')
+
+        if not token:
+            return Response({"error": "Authentication token required."}, status=status.HTTP_401_UNAUTHORIZED)
+
+        try:
+            user = User.objects.get(username="john_doe")  # In a real system, validate the token properly
+        except User.DoesNotExist:
+            return Response({"error": "User not found."}, status=status.HTTP_404_NOT_FOUND)
+
+        if user.tokens < 100:
+            return Response({"error": "Insufficient tokens."}, status=status.HTTP_400_BAD_REQUEST)
+
+        user.tokens -= 100
+        user.save()
+
+        chat = Chat.objects.create(user=user, message=request.data['message'], response="AI response")
+
+        # Serialize the chat response
+        serializer = ChatSerializer(chat)
+        return Response(serializer.data, status=status.HTTP_200_OK)

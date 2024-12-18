@@ -1,5 +1,10 @@
 from rest_framework import serializers
 from .models import User
+from rest_framework import serializers
+from .models import User
+from rest_framework import serializers
+from .models import Chat
+
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -13,10 +18,6 @@ class UserSerializer(serializers.ModelSerializer):
         user.save()
         return user
 
-from rest_framework import serializers
-from .models import User
-import random
-import string
 
 class LoginSerializer(serializers.Serializer):
     username = serializers.CharField(max_length=50)
@@ -30,3 +31,9 @@ class LoginSerializer(serializers.Serializer):
             raise serializers.ValidationError("Incorrect password")
         except User.DoesNotExist:
             raise serializers.ValidationError("User not found")
+
+
+class ChatSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Chat
+        fields = ['user', 'message', 'response', 'timestamp']
