@@ -177,7 +177,7 @@ Key Points:
 - API Documentation: Each API endpoint is documented with the URL, method, request body, and response.
 - Task Breakdown: A summary of each task is provided for clarity.
 
-### Next Steps:
-1. Replace the placeholder GitHub URL in the **Clone the repository** section.
+Next Steps:
+1. Replace the placeholder GitHub URL in the Clone the repository section.
 2. Make sure the actual `requirements.txt` file is included with the necessary dependencies (e.g., `Django`, `djangorestframework`).
 3. Update the `Authorization` token handling in the `ChatView` and `TokenBalanceView` if you plan to implement more sophisticated authentication (e.g., JWT).
